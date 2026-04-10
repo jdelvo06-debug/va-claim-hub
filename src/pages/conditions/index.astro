@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import ConditionSearch from '../../components/ConditionSearch';
+
+const conditions = await getCollection('conditions');
+const conditionData = conditions
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((c) => ({
+    id: c.id,
+    title: c.data.title,
+    description: c.data.description,
+    category: c.data.category,
+    commonRatings: c.data.commonRatings,
+  }));
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'VA Disability Conditions Database',
+  description: 'Browse VA disability conditions with rating criteria, claim strategies, and C&P exam tips for each condition.',
+  url: 'https://vaclaimhub.com/conditions',
+};
+---
+
+<BaseLayout
+  title="VA Disability Conditions Database | Browse by Condition — VA Claim Hub"
+  description="Browse our database of VA disability conditions. Find rating criteria, claim strategies, nexus letter tips, and C&P exam preparation for your specific condition."
+  structuredData={structuredData}
+  tags={['VA disability conditions', 'VA rating criteria', 'disability claim conditions']}
+>
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900">
+        VA Disability Conditions
+      </h1>
+      <p class="text-zinc-500 mt-3 max-w-[60ch] leading-relaxed">
+        Search and filter our database of service-connected conditions. Each guide covers rating criteria, evidence requirements, C&P exam tips, and secondary claim strategies.
+      </p>
+    </div>
+
+    <ConditionSearch client:load conditions={conditionData} />
+  </section>
+</BaseLayout>

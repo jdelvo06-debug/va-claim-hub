@@ -1,0 +1,97 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const conditions = await getCollection('conditions');
+  return conditions.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalWebPage',
+  name: entry.data.title,
+  description: entry.data.description,
+  url: `https://vaclaimhub.com/conditions/${entry.id}`,
+  about: {
+    '@type': 'MedicalCondition',
+    name: entry.data.title,
+  },
+};
+
+const breadcrumbData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vaclaimhub.com' },
+    { '@type': 'ListItem', position: 2, name: 'Conditions', item: 'https://vaclaimhub.com/conditions' },
+    { '@type': 'ListItem', position: 3, name: entry.data.title, item: `https://vaclaimhub.com/conditions/${entry.id}` },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${entry.data.title} VA Disability Rating Guide — VA Claim Hub`}
+  description={entry.data.description}
+  structuredData={structuredData}
+  tags={entry.data.keywords}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbData)} />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-zinc-400 mb-8">
+      <a href="/" class="hover:text-zinc-600 transition-colors">Home</a>
+      <span>/</span>
+      <a href="/conditions" class="hover:text-zinc-600 transition-colors">Conditions</a>
+      <span>/</span>
+      <span class="text-zinc-600">{entry.data.title.split('(')[0].trim()}</span>
+    </nav>
+
+    <!-- Meta badges -->
+    <div class="flex flex-wrap items-center gap-3 mb-6">
+      <span class="text-xs font-medium text-emerald-700 uppercase tracking-wider bg-emerald-50 px-2.5 py-1 rounded-md">
+        {entry.data.category.replace('-', ' ')}
+      </span>
+      {entry.data.commonRatings.length > 0 && (
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs text-zinc-400">Common ratings:</span>
+          {entry.data.commonRatings.map((rating: string) => (
+            <span class="inline-flex px-2 py-0.5 text-xs font-mono font-medium text-zinc-600 bg-zinc-100 rounded">
+              {rating}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <!-- Content -->
+    <div class="prose prose-zinc prose-lg max-w-none prose-headings:tracking-tight prose-h1:text-3xl prose-h1:md:text-4xl prose-h2:text-xl prose-h2:md:text-2xl prose-a:text-emerald-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-zinc-800">
+      <Content />
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-16 pt-8 border-t border-zinc-200">
+      <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+        <div>
+          <p class="text-sm font-medium text-zinc-900">Need help with your claim?</p>
+          <p class="text-sm text-zinc-500 mt-1">Browse more conditions or learn about nexus letters and C&P exam prep.</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="/conditions" class="px-4 py-2 text-sm font-medium text-zinc-700 bg-zinc-100 rounded-lg hover:bg-zinc-200 transition-all">
+            All Conditions
+          </a>
+          <a href="/nexus-letters" class="px-4 py-2 text-sm font-medium text-white bg-emerald-700 rounded-lg hover:bg-emerald-800 transition-all">
+            Nexus Letters
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+const sorted = posts.sort(
+  (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'VA Claim Hub Blog',
+  description: 'Articles and guides to help veterans file stronger VA disability claims.',
+  url: 'https://vaclaimhub.com/blog',
+};
+---
+
+<BaseLayout
+  title="VA Disability Claims Blog | Tips & Strategies — VA Claim Hub"
+  description="Expert articles on VA disability claims — nexus letter strategies, C&P exam preparation, secondary condition filing, and appeals guidance for veterans."
+  structuredData={structuredData}
+  tags={['VA claims blog', 'veteran disability tips', 'VA claim strategy']}
+>
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-12">
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900">
+        VA Claims Blog
+      </h1>
+      <p class="text-zinc-500 mt-3 max-w-[55ch] leading-relaxed">
+        Strategies, guides, and tips to help you build a stronger VA disability claim.
+      </p>
+    </div>
+
+    <div class="divide-y divide-zinc-100">
+      {sorted.map((post) => (
+        <a href={`/blog/${post.id}`} class="group block py-8 first:pt-0">
+          <div class="flex flex-wrap gap-2 mb-3">
+            {post.data.tags.map((tag: string) => (
+              <span class="text-[10px] font-medium text-emerald-700 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <h2 class="text-xl font-semibold text-zinc-900 group-hover:text-emerald-700 transition-colors tracking-tight">
+            {post.data.title}
+          </h2>
+          <p class="text-sm text-zinc-500 mt-2 leading-relaxed max-w-[55ch]">
+            {post.data.description}
+          </p>
+          <time class="text-xs font-mono text-zinc-400 mt-3 block" datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+          </time>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

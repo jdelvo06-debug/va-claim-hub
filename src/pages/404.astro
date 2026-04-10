@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found — VA Claim Hub" description="The page you're looking for doesn't exist." noindex={true}>
+  <section class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
+    <p class="text-sm font-mono text-zinc-400 mb-4">404</p>
+    <h1 class="text-3xl font-bold tracking-tighter text-zinc-900 mb-4">Page not found</h1>
+    <p class="text-zinc-500 mb-8 max-w-[40ch] mx-auto">
+      The page you are looking for does not exist or has been moved.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a
+        href="/"
+        class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-emerald-700 rounded-lg hover:bg-emerald-800 active:scale-[0.98] transition-all"
+      >
+        Go Home
+      </a>
+      <a
+        href="/conditions"
+        class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-zinc-700 bg-zinc-100 rounded-lg hover:bg-zinc-200 active:scale-[0.98] transition-all"
+      >
+        Browse Conditions
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ResourceSubmitForm from '../components/ResourceSubmitForm';
+---
+
+<BaseLayout
+  title="Submit a Resource | Help Fellow Veterans — VA Claim Hub"
+  description="Submit a helpful VA disability claim resource — nexus letter services, tools, guides, or legal resources. All submissions are reviewed before publishing."
+  tags={['submit resource', 'VA claim resources', 'contribute']}
+>
+  <section class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900">
+        Submit a Resource
+      </h1>
+      <p class="text-zinc-500 mt-3 max-w-[55ch] leading-relaxed">
+        Found a tool, guide, service, or resource that helped with your VA claim? Share it with the community. All submissions are reviewed before being published.
+      </p>
+    </div>
+
+    <ResourceSubmitForm client:load />
+
+    <div class="mt-12 p-5 rounded-xl bg-zinc-50 border border-zinc-100">
+      <h3 class="text-sm font-semibold text-zinc-800 mb-2">Submission Guidelines</h3>
+      <ul class="text-sm text-zinc-500 space-y-1.5">
+        <li>Resources must be directly relevant to VA disability claims</li>
+        <li>No affiliate links or paid promotions without disclosure</li>
+        <li>Resources are reviewed for accuracy before being listed</li>
+        <li>Your email is only used to notify you of approval — it is not published</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

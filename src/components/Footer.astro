@@ -1,0 +1,74 @@
+---
+import NewsletterForm from './NewsletterForm';
+
+const currentYear = new Date().getFullYear();
+
+const resourceLinks = [
+  { href: '/conditions', label: 'Browse Conditions' },
+  { href: '/nexus-letters', label: 'Nexus Letter Guide' },
+  { href: '/cp-exam-prep', label: 'C&P Exam Prep' },
+  { href: '/dbq-resources', label: 'DBQ Resources' },
+  { href: '/blog', label: 'Articles' },
+];
+
+const siteLinks = [
+  { href: '/submit-resource', label: 'Submit a Resource' },
+  { href: '/about', label: 'About' },
+];
+---
+
+<footer class="border-t border-zinc-200 bg-zinc-50 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-2.5 mb-4">
+          <div class="w-7 h-7 rounded-md bg-emerald-700 flex items-center justify-center">
+            <svg class="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <span class="text-base font-semibold tracking-tight">VA Claim Hub</span>
+        </div>
+        <p class="text-sm text-zinc-500 max-w-sm leading-relaxed mb-6">
+          Helping veterans navigate the VA disability claims process with condition-specific guides, rating tips, and expert resources.
+        </p>
+        <div class="max-w-sm">
+          <p class="text-sm font-medium text-zinc-800 mb-3">Get weekly VA claims tips</p>
+          <NewsletterForm client:visible />
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold text-zinc-900 mb-4">Resources</h3>
+        <ul class="space-y-3">
+          {resourceLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-zinc-500 hover:text-zinc-800 transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-semibold text-zinc-900 mb-4">Site</h3>
+        <ul class="space-y-3">
+          {siteLinks.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-zinc-500 hover:text-zinc-800 transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-zinc-200">
+      <p class="text-xs text-zinc-400">
+        &copy; {currentYear} VA Claim Hub. This site provides general information and is not affiliated with the U.S. Department of Veterans Affairs. Always consult a qualified Veterans Service Organization (VSO) or accredited claims agent for personalized advice.
+      </p>
+    </div>
+  </div>
+</footer>

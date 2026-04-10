@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'DBQ Resources for VA Disability Claims',
+  description: 'Guide to Disability Benefits Questionnaires (DBQs) — what they are, how they affect your rating, and how your private doctor can fill one out.',
+  url: 'https://vaclaimhub.com/dbq-resources',
+  author: { '@type': 'Organization', name: 'VA Claim Hub' },
+};
+
+const dbqCategories = [
+  {
+    name: 'Mental Health DBQs',
+    items: [
+      'Mental Disorders (PTSD, Depression, Anxiety)',
+      'Eating Disorders',
+      'PTSD Stressor Verification',
+    ],
+  },
+  {
+    name: 'Musculoskeletal DBQs',
+    items: [
+      'Back (Thoracolumbar Spine)',
+      'Neck (Cervical Spine)',
+      'Knee and Lower Leg',
+      'Shoulder and Arm',
+      'Hip and Thigh',
+      'Ankle',
+      'Wrist and Hand',
+    ],
+  },
+  {
+    name: 'Neurological DBQs',
+    items: [
+      'Headaches (Including Migraines)',
+      'Peripheral Nerves',
+      'Traumatic Brain Injury (TBI)',
+      'Seizure Disorders',
+    ],
+  },
+  {
+    name: 'Auditory DBQs',
+    items: [
+      'Hearing Loss and Tinnitus',
+      'Ear Conditions',
+      'Vestibular and Balance',
+    ],
+  },
+  {
+    name: 'Respiratory DBQs',
+    items: [
+      'Sleep Apnea',
+      'Respiratory Conditions',
+      'Sinusitis and Rhinitis',
+    ],
+  },
+  {
+    name: 'Cardiovascular & Digestive DBQs',
+    items: [
+      'Hypertension',
+      'Heart Conditions',
+      'Esophageal Conditions (GERD)',
+      'Intestinal Conditions (IBS)',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="DBQ Resources for VA Disability Claims | Forms & Guide — VA Claim Hub"
+  description="Guide to VA Disability Benefits Questionnaires (DBQs). Learn which DBQ applies to your condition and how your private doctor can complete one to support your claim."
+  structuredData={structuredData}
+  tags={['DBQ', 'Disability Benefits Questionnaire', 'VA claim forms', 'VA disability evidence']}
+>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <nav class="flex items-center gap-2 text-sm text-zinc-400 mb-8">
+      <a href="/" class="hover:text-zinc-600 transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-zinc-600">DBQ Resources</span>
+    </nav>
+
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900 mb-6">
+      Disability Benefits Questionnaires (DBQs)
+    </h1>
+    <p class="text-lg text-zinc-600 leading-relaxed max-w-[60ch] mb-12">
+      DBQs are the standardized forms used by VA examiners — and your private doctors — to document the specific findings needed to rate your disability.
+    </p>
+
+    <div class="prose prose-zinc prose-lg max-w-none prose-headings:tracking-tight prose-a:text-emerald-700 prose-a:no-underline hover:prose-a:underline mb-16">
+      <h2>What Is a DBQ?</h2>
+      <p>
+        A Disability Benefits Questionnaire is a standardized medical form that captures the exact clinical findings the VA needs to rate a specific condition. During a <a href="/cp-exam-prep">C&P exam</a>, the examiner fills out the appropriate DBQ for your claimed condition. The rating official then uses the completed DBQ to determine your disability percentage.
+      </p>
+
+      <h2>Can Your Private Doctor Complete a DBQ?</h2>
+      <p>
+        <strong>Yes.</strong> Veterans can have their private treating physician complete a DBQ and submit it as evidence with their claim. This is particularly useful when:
+      </p>
+      <ul>
+        <li>Your treating doctor has a more thorough understanding of your condition than a C&P examiner meeting you once</li>
+        <li>You want to ensure all relevant findings are documented before the VA processes your claim</li>
+        <li>You are filing a Supplemental Claim and need updated medical evidence</li>
+        <li>Your C&P exam was inadequate and you want to submit a competing medical opinion</li>
+      </ul>
+      <p>
+        Your doctor must complete the DBQ <strong>in its entirety</strong> — incomplete DBQs may not be accepted by the VA or may result in an additional C&P exam being ordered.
+      </p>
+
+      <h2>How to Use DBQs Strategically</h2>
+      <ol>
+        <li><strong>Identify the correct DBQ</strong> for your condition (see the list below)</li>
+        <li><strong>Give it to your treating physician</strong> and explain that the VA will use the specific measurements and findings on this form to determine your rating</li>
+        <li><strong>Ensure completeness</strong> — every field should be filled out, including range of motion measurements, flare-up documentation, and functional impact</li>
+        <li><strong>Submit with your claim</strong> — attach the completed DBQ as evidence when filing or supplementing your VA claim</li>
+      </ol>
+
+      <h2>Important Notes</h2>
+      <ul>
+        <li>DBQs are publicly available from the VA website — you do not need to request them</li>
+        <li>A privately completed DBQ does <strong>not</strong> replace a C&P exam in all cases. The VA may still order their own exam, but a well-completed DBQ from your treating doctor carries significant evidentiary weight</li>
+        <li>Make sure your doctor is aware that measurements matter — for musculoskeletal conditions, range of motion degrees directly determine rating levels</li>
+        <li>A DBQ paired with a strong <a href="/nexus-letters">nexus letter</a> is a powerful combination of evidence</li>
+      </ul>
+    </div>
+
+    <!-- DBQ Categories -->
+    <h2 class="text-xl font-bold tracking-tight text-zinc-900 mb-6">DBQs by Category</h2>
+    <div class="space-y-6">
+      {dbqCategories.map((cat) => (
+        <div class="border border-zinc-200 rounded-xl overflow-hidden">
+          <div class="px-5 py-3 bg-zinc-50 border-b border-zinc-100">
+            <h3 class="text-sm font-semibold text-zinc-800">{cat.name}</h3>
+          </div>
+          <ul class="divide-y divide-zinc-50">
+            {cat.items.map((item) => (
+              <li class="px-5 py-3 text-sm text-zinc-600">{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-zinc-200 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+      <a href="/cp-exam-prep" class="text-sm font-medium text-emerald-700 hover:text-emerald-800 transition-colors">
+        &larr; C&P Exam Prep
+      </a>
+      <a href="/conditions" class="px-4 py-2 text-sm font-medium text-white bg-emerald-700 rounded-lg hover:bg-emerald-800 transition-all">
+        Browse Conditions
+      </a>
+    </div>
+  </article>
+</BaseLayout>

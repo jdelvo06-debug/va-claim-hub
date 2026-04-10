@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'C&P Exam Preparation Guide for Veterans',
+  description: 'How to prepare for your VA Compensation and Pension exam — what to expect, what the examiner evaluates, and mistakes that lower your rating.',
+  url: 'https://vaclaimhub.com/cp-exam-prep',
+  author: { '@type': 'Organization', name: 'VA Claim Hub' },
+};
+---
+
+<BaseLayout
+  title="C&P Exam Preparation Guide | What to Expect — VA Claim Hub"
+  description="Prepare for your VA Compensation & Pension exam with this guide. Learn what the examiner evaluates, how to describe your symptoms, and mistakes to avoid."
+  structuredData={structuredData}
+  tags={['C&P exam', 'Compensation and Pension', 'VA exam preparation', 'disability exam']}
+>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <nav class="flex items-center gap-2 text-sm text-zinc-400 mb-8">
+      <a href="/" class="hover:text-zinc-600 transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-zinc-600">C&P Exam Prep</span>
+    </nav>
+
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900 mb-6">
+      C&P Exam Preparation Guide
+    </h1>
+    <p class="text-lg text-zinc-600 leading-relaxed max-w-[60ch] mb-12">
+      Your Compensation and Pension exam is one of the most important appointments in the VA claims process. Here is how to prepare.
+    </p>
+
+    <div class="prose prose-zinc prose-lg max-w-none prose-headings:tracking-tight prose-a:text-emerald-700 prose-a:no-underline hover:prose-a:underline">
+      <h2>What Is a C&P Exam?</h2>
+      <p>
+        A Compensation and Pension exam is a medical examination ordered by the VA to evaluate the <strong>current severity</strong> of your claimed condition and determine whether it is <strong>connected to your military service</strong>. The examiner produces a Disability Benefits Questionnaire (DBQ) that the VA rating official uses to assign your disability percentage.
+      </p>
+      <p>
+        The C&P exam is <strong>not a treatment appointment</strong>. The examiner is there to document and evaluate, not to treat you or advocate for your claim. Understanding this distinction is critical.
+      </p>
+
+      <h2>Before the Exam</h2>
+      <h3>Gather Documentation</h3>
+      <ul>
+        <li>Copies of your service treatment records</li>
+        <li>Current medical records, imaging, and test results</li>
+        <li>Your <a href="/nexus-letters">nexus letter</a> if you have one</li>
+        <li>A personal statement describing your condition and its daily impact</li>
+        <li>Buddy statements from fellow service members or family</li>
+        <li>Symptom logs, headache diaries, or pain journals</li>
+      </ul>
+
+      <h3>Prepare Your Narrative</h3>
+      <p>Practice describing:</p>
+      <ul>
+        <li><strong>When symptoms started</strong> and how they relate to service</li>
+        <li><strong>Your worst days</strong>, not your best — this is not the time for military stoicism</li>
+        <li><strong>Specific examples</strong> of how the condition affects work, relationships, and daily life</li>
+        <li><strong>Frequency and duration</strong> — "3-4 migraine attacks per month, each lasting 8-24 hours" is far more useful than "I get headaches a lot"</li>
+      </ul>
+
+      <h3>Day-of Preparation</h3>
+      <ul>
+        <li>Arrive 15 minutes early with government-issued ID</li>
+        <li>Do not take extra medication to mask symptoms</li>
+        <li>Do not stretch or warm up before a musculoskeletal exam — they need your natural baseline</li>
+        <li>Bring any symptom logs or diaries</li>
+      </ul>
+
+      <h2>During the Exam</h2>
+
+      <h3>Mental Health Exams</h3>
+      <p>
+        Expect a clinical interview lasting 30 to 90 minutes covering current symptoms, social functioning, work capacity, treatment history, and medication response. Be specific about how your condition manifests daily, including sleep disturbance, concentration difficulty, irritability, and social withdrawal.
+      </p>
+
+      <h3>Musculoskeletal Exams</h3>
+      <p>
+        The examiner will measure range of motion using a goniometer, test joint stability, and assess functional loss. Per <em>Correia v. McDonald</em>, they must measure active, passive, weight-bearing, and non-weight-bearing range of motion. Stop at the point where pain limits your motion — do not push through.
+      </p>
+
+      <h3>General Tips</h3>
+      <ul>
+        <li>Answer every question thoroughly and honestly</li>
+        <li>If the examiner does not ask about a relevant symptom, volunteer it</li>
+        <li>Do not minimize your condition — military culture works against you here</li>
+        <li>If asked "how are you doing today," do not reflexively answer "fine"</li>
+        <li>Describe the <strong>impact on your daily functioning</strong>, not just the symptoms in isolation</li>
+      </ul>
+
+      <h2>The Biggest Mistake Veterans Make</h2>
+      <p>
+        Treating the C&P exam like a military fitness evaluation. The instinct to say "I'm fine" or demonstrate maximum effort during range of motion testing works directly against you. The examiner can only rate what they observe and what you report. If you downplay your symptoms, your rating will reflect that understated version of your reality.
+      </p>
+      <p>
+        Be honest. Be thorough. Describe your condition at its worst, not on the one day you happen to feel okay.
+      </p>
+
+      <h2>After the Exam</h2>
+      <p>
+        The examiner submits their report to the VA within days. You can request a copy of the DBQ through your VSO or claim file. If the findings do not reflect your condition, you can submit a rebuttal, request a new exam, or appeal the rating decision through a Supplemental Claim or Higher-Level Review.
+      </p>
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-zinc-200 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+      <a href="/nexus-letters" class="text-sm font-medium text-emerald-700 hover:text-emerald-800 transition-colors">
+        &larr; Nexus Letter Guide
+      </a>
+      <a href="/dbq-resources" class="text-sm font-medium text-emerald-700 hover:text-emerald-800 transition-colors">
+        DBQ Resources &rarr;
+      </a>
+    </div>
+  </article>
+</BaseLayout>

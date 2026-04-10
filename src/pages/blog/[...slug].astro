@@ -1,0 +1,87 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: entry.data.title,
+  description: entry.data.description,
+  datePublished: entry.data.pubDate.toISOString(),
+  dateModified: (entry.data.updatedDate || entry.data.pubDate).toISOString(),
+  author: { '@type': 'Organization', name: 'VA Claim Hub' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'VA Claim Hub',
+  },
+};
+
+const breadcrumbData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vaclaimhub.com' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://vaclaimhub.com/blog' },
+    { '@type': 'ListItem', position: 3, name: entry.data.title, item: `https://vaclaimhub.com/blog/${entry.id}` },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${entry.data.title} — VA Claim Hub`}
+  description={entry.data.description}
+  ogType="article"
+  author={entry.data.author}
+  publishDate={entry.data.pubDate.toISOString()}
+  tags={entry.data.tags}
+  structuredData={structuredData}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbData)} />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <nav class="flex items-center gap-2 text-sm text-zinc-400 mb-8">
+      <a href="/" class="hover:text-zinc-600 transition-colors">Home</a>
+      <span>/</span>
+      <a href="/blog" class="hover:text-zinc-600 transition-colors">Blog</a>
+      <span>/</span>
+      <span class="text-zinc-600 truncate">{entry.data.title}</span>
+    </nav>
+
+    <header class="mb-10">
+      <div class="flex flex-wrap gap-2 mb-4">
+        {entry.data.tags.map((tag: string) => (
+          <span class="text-[10px] font-medium text-emerald-700 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded">
+            {tag}
+          </span>
+        ))}
+      </div>
+      <time class="text-xs font-mono text-zinc-400 block mb-3" datetime={entry.data.pubDate.toISOString()}>
+        {entry.data.pubDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+      </time>
+    </header>
+
+    <div class="prose prose-zinc prose-lg max-w-none prose-headings:tracking-tight prose-h1:text-3xl prose-h1:md:text-4xl prose-h2:text-xl prose-h2:md:text-2xl prose-a:text-emerald-700 prose-a:no-underline hover:prose-a:underline prose-strong:text-zinc-800">
+      <Content />
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-zinc-200 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+      <a href="/blog" class="text-sm font-medium text-emerald-700 hover:text-emerald-800 transition-colors">
+        &larr; Back to all articles
+      </a>
+      <a href="/conditions" class="px-4 py-2 text-sm font-medium text-white bg-emerald-700 rounded-lg hover:bg-emerald-800 transition-all">
+        Browse Conditions
+      </a>
+    </div>
+  </article>
+</BaseLayout>

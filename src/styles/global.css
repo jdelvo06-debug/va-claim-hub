@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/500.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/700.css";
+@import "@fontsource/geist-mono/400.css";
+
+@theme {
+  --font-sans: "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", monospace;
+  --color-background: oklch(0.985 0 0);
+  --color-foreground: oklch(0.145 0.02 260);
+  --color-muted: oklch(0.955 0.005 260);
+  --color-muted-foreground: oklch(0.55 0.015 260);
+  --color-accent: oklch(0.55 0.17 145);
+  --color-accent-foreground: oklch(0.985 0 0);
+  --color-border: oklch(0.9 0.01 260);
+  --color-destructive: oklch(0.55 0.2 25);
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.025em;
+  }
+}

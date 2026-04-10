@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About VA Claim Hub',
+  url: 'https://vaclaimhub.com/about',
+};
+---
+
+<BaseLayout
+  title="About VA Claim Hub | Free Resources for Veterans"
+  description="VA Claim Hub provides free, accurate information to help veterans navigate the VA disability claims process. No paywalls, no gatekeeping."
+  structuredData={structuredData}
+>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900 mb-6">
+      About VA Claim Hub
+    </h1>
+
+    <div class="prose prose-zinc prose-lg max-w-none prose-headings:tracking-tight">
+      <p>
+        VA Claim Hub exists for one reason: <strong>too many veterans are underrated or denied because they did not have the right information at the right time.</strong>
+      </p>
+      <p>
+        The VA disability claims process is complex by design. Rating criteria are buried in federal regulations. The difference between a 30% and a 70% mental health rating often comes down to how you describe your symptoms during a single exam. A missing nexus letter can mean the difference between approval and denial. Most veterans do not learn this until after they have already filed — and lost.
+      </p>
+      <p>
+        This site exists to change that.
+      </p>
+
+      <h2>What We Provide</h2>
+      <ul>
+        <li><strong>Condition-specific rating guides</strong> that break down exactly what the VA looks for — written in plain language, not legalese</li>
+        <li><strong>Nexus letter guidance</strong> so you know what your doctor needs to write and why generic letters get rejected</li>
+        <li><strong>C&P exam preparation</strong> that helps you walk in prepared instead of caught off guard</li>
+        <li><strong>DBQ resources</strong> so you and your doctor understand what measurements and findings determine your rating</li>
+        <li><strong>Secondary claim strategies</strong> because most veterans are leaving compensation on the table by not connecting conditions they already qualify for</li>
+      </ul>
+
+      <h2>What We Are Not</h2>
+      <p>
+        VA Claim Hub is an informational resource. We are <strong>not</strong> a law firm, a claims consulting service, or a branch of the VA. We do not file claims on your behalf, and nothing on this site constitutes legal or medical advice.
+      </p>
+      <p>
+        For personalized assistance with your claim, we strongly recommend contacting an <strong>accredited Veterans Service Organization (VSO)</strong> such as the DAV, VFW, American Legion, or a VA-accredited claims agent. These organizations provide free representation and have years of experience navigating the VA system.
+      </p>
+
+      <h2>Accuracy and Updates</h2>
+      <p>
+        We strive to keep all information current with the latest VA regulations and rating criteria. The VA disability rating schedule is subject to change, and we update our guides accordingly. If you notice outdated information on any page, please <a href="/submit-resource">let us know</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

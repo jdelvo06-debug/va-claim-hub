@@ -1,6 +1,6 @@
 ---
 title: "Burn Pit & Toxic Exposure (PACT Act)"
-description: "VA disability rating guide for burn pit and toxic exposure conditions under the PACT Act — presumptive conditions list, respiratory and cancer claims, and how to file under the new 2022 law."
+description: "VA disability rating guide for burn pit and toxic exposure under the PACT Act — presumptive conditions, respiratory and cancer claims, and filing strategy."
 category: "respiratory"
 commonRatings: ["10%", "30%", "60%", "100%"]
 keywords: ["burn pit VA rating", "PACT Act VA claim", "toxic exposure VA", "airborne hazards VA", "burn pit respiratory"]

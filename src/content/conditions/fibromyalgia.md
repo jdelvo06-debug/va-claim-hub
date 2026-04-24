@@ -1,6 +1,6 @@
 ---
 title: "Fibromyalgia"
-description: "VA disability rating guide for fibromyalgia — rating criteria, service connection strategies, nexus requirements, and how fibromyalgia interacts with other VA-rated conditions."
+description: "VA disability rating guide for fibromyalgia — rating criteria, service connection strategies, nexus requirements, and secondary condition interactions."
 category: "musculoskeletal"
 commonRatings: ["10%", "20%", "40%"]
 keywords: ["fibromyalgia VA rating", "fibromyalgia disability claim", "fibromyalgia service connection", "chronic pain VA rating"]

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CombinedRatingsCalculator from '../components/CombinedRatingsCalculator';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'VA Combined Ratings Calculator',
+  description: 'Calculate your VA combined disability rating using the official VA whole-person formula. See your final rounded rating and estimated monthly compensation.',
+  url: 'https://vaclaimhub.com/combined-ratings-calculator',
+  applicationCategory: 'UtilityApplication',
+  operatingSystem: 'All',
+};
+---
+
+<BaseLayout
+  title="VA Combined Ratings Calculator | Official VA Formula — VA Claim Hub"
+  description="Calculate your VA combined disability rating instantly. Uses the official whole-person formula — enter your individual ratings to see your final combined percentage and estimated monthly compensation."
+  structuredData={structuredData}
+  tags={['VA combined ratings calculator', 'VA disability calculator', 'combined rating formula', 'VA math']}
+>
+  <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <nav class="flex items-center gap-2 text-sm text-zinc-400 mb-8">
+      <a href="/" class="hover:text-zinc-600 transition-colors">Home</a>
+      <span>/</span>
+      <span class="text-zinc-600">Combined Ratings Calculator</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900">
+        VA Combined Ratings Calculator
+      </h1>
+      <p class="text-zinc-500 mt-3 max-w-[60ch] leading-relaxed">
+        VA ratings are not simply added together. Enter your individual ratings below to see your true combined rating using the official VA whole-person formula.
+      </p>
+    </div>
+
+    <CombinedRatingsCalculator client:load />
+
+    <div class="mt-16 pt-8 border-t border-zinc-200 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+      <a href="/blog/how-combined-ratings-work" class="text-sm font-medium text-emerald-700 hover:text-emerald-800 transition-colors">
+        &larr; How combined ratings work
+      </a>
+      <a href="/conditions" class="px-4 py-2 text-sm font-medium text-white bg-emerald-700 rounded-lg hover:bg-emerald-800 transition-all">
+        Browse Conditions
+      </a>
+    </div>
+  </section>
+</BaseLayout>

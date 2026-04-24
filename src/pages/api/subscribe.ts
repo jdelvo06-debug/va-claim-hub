@@ -24,7 +24,12 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    await db.insert(subscribers).values({ email }).onConflictDoNothing();
+    const unsubscribeToken = crypto.randomUUID();
+
+    await db
+      .insert(subscribers)
+      .values({ email, unsubscribeToken })
+      .onConflictDoNothing();
 
     return new Response(
       JSON.stringify({ success: true }),

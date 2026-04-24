@@ -1,6 +1,6 @@
 ---
 title: "Military Sexual Trauma (MST)"
-description: "VA disability rating guide for conditions related to Military Sexual Trauma — how MST functions as a stressor, qualifying mental health conditions, and the relaxed evidentiary standard."
+description: "VA disability rating guide for Military Sexual Trauma — MST as a stressor, qualifying mental health conditions, and the relaxed evidentiary standard."
 category: "mental-health"
 commonRatings: ["30%", "50%", "70%", "100%"]
 keywords: ["MST VA rating", "military sexual trauma VA claim", "MST PTSD", "MST mental health disability"]

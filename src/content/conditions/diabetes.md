@@ -1,6 +1,6 @@
 ---
 title: "Diabetes Mellitus Type 2 (Agent Orange)"
-description: "VA disability rating guide for Type 2 diabetes — Agent Orange presumptive service connection, rating criteria, and secondary conditions that can significantly increase combined ratings."
+description: "VA disability rating guide for Type 2 diabetes — Agent Orange presumptive service connection, rating criteria, and secondary conditions strategy."
 category: "metabolic"
 commonRatings: ["10%", "20%", "40%", "60%"]
 keywords: ["diabetes VA rating", "Agent Orange diabetes", "type 2 diabetes VA claim", "diabetes secondary conditions VA"]

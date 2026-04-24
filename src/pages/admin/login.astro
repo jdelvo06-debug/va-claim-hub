@@ -2,12 +2,19 @@
 export const prerender = false;
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { resetLoginRateLimit } from '../../lib/rate-limit';
 
 if (Astro.request.method === 'POST') {
   const formData = await Astro.request.formData();
   const password = formData.get('password');
 
   if (password === import.meta.env.ADMIN_SECRET) {
+    const ip =
+      Astro.request.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
+      Astro.request.headers.get('x-real-ip') ??
+      'unknown';
+    resetLoginRateLimit(ip);
+
     Astro.cookies.set('admin_token', import.meta.env.ADMIN_SECRET, {
       path: '/',
       httpOnly: true,

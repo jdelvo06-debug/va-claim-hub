@@ -2,15 +2,12 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../lib/db';
 import { resources } from '../../../lib/schema';
 import { desc, eq } from 'drizzle-orm';
+import { isAdminAuthorized } from '../../../lib/admin-auth';
 
 export const prerender = false;
 
-function isAuthorized(cookies: Parameters<APIRoute>[0]['cookies']): boolean {
-  return cookies.get('admin_token')?.value === import.meta.env.ADMIN_SECRET;
-}
-
 export const GET: APIRoute = async ({ cookies }) => {
-  if (!isAuthorized(cookies)) {
+  if (!isAdminAuthorized(cookies)) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },
@@ -37,7 +34,7 @@ export const GET: APIRoute = async ({ cookies }) => {
 };
 
 export const PATCH: APIRoute = async ({ cookies, request }) => {
-  if (!isAuthorized(cookies)) {
+  if (!isAdminAuthorized(cookies)) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },

@@ -2,12 +2,12 @@ import type { APIRoute } from 'astro';
 import { db } from '../../../lib/db';
 import { subscribers } from '../../../lib/schema';
 import { desc } from 'drizzle-orm';
+import { isAdminAuthorized } from '../../../lib/admin-auth';
 
 export const prerender = false;
 
 export const GET: APIRoute = async ({ cookies }) => {
-  const adminToken = cookies.get('admin_token')?.value;
-  if (adminToken !== import.meta.env.ADMIN_SECRET) {
+  if (!isAdminAuthorized(cookies)) {
     return new Response(JSON.stringify({ error: 'Unauthorized' }), {
       status: 401,
       headers: { 'Content-Type': 'application/json' },

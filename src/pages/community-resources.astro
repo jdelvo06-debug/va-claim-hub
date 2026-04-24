@@ -1,0 +1,128 @@
+---
+export const prerender = false;
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { db } from '../lib/db';
+import { resources } from '../lib/schema';
+import { eq } from 'drizzle-orm';
+
+const approved = await db
+  .select()
+  .from(resources)
+  .where(eq(resources.status, 'approved'))
+  .orderBy(resources.createdAt);
+
+const categories: Record<string, { label: string; items: typeof approved }> = {
+  'nexus-letter': { label: 'Nexus Letter Services & Guides', items: [] },
+  dbq: { label: 'DBQ Resources', items: [] },
+  'cp-exam': { label: 'C&P Exam Prep', items: [] },
+  general: { label: 'General Claim Resources', items: [] },
+};
+
+for (const resource of approved) {
+  const cat = resource.category as keyof typeof categories;
+  if (categories[cat]) {
+    categories[cat].items.push(resource);
+  } else {
+    categories.general.items.push(resource);
+  }
+}
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Community Resources — VA Claim Hub',
+  description: 'Veteran-submitted resources for VA disability claims, reviewed and approved by the VA Claim Hub team.',
+  url: 'https://vaclaimhub.com/community-resources',
+};
+---
+
+<BaseLayout
+  title="Community Resources | Veteran-Submitted Guides & Tools — VA Claim Hub"
+  description="Browse veteran-submitted and admin-reviewed resources for VA disability claims — nexus letter services, DBQ guides, C&P exam prep, and general claim tools."
+  structuredData={structuredData}
+  tags={['community resources', 'veteran resources', 'VA claim tools', 'nexus letter services']}
+>
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-10">
+      <nav class="flex items-center gap-2 text-sm text-zinc-400 mb-6">
+        <a href="/" class="hover:text-zinc-600 transition-colors">Home</a>
+        <span>/</span>
+        <span class="text-zinc-600">Community Resources</span>
+      </nav>
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900">
+        Community Resources
+      </h1>
+      <p class="text-zinc-500 mt-3 max-w-[60ch] leading-relaxed">
+        Resources submitted by veterans and advocates — reviewed before publishing. Know something that should be listed? <a href="/submit-resource" class="text-emerald-700 hover:underline">Submit a resource</a>.
+      </p>
+    </div>
+
+    {approved.length === 0 ? (
+      <div class="text-center py-20 border border-dashed border-zinc-200 rounded-2xl">
+        <p class="text-zinc-400 mb-4">No approved resources yet.</p>
+        <a
+          href="/submit-resource"
+          class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-emerald-700 rounded-lg hover:bg-emerald-800 transition-all"
+        >
+          Be the first to submit
+        </a>
+      </div>
+    ) : (
+      <div class="space-y-12">
+        {Object.entries(categories).map(([, { label, items }]) =>
+          items.length > 0 ? (
+            <div>
+              <h2 class="text-lg font-semibold tracking-tight text-zinc-900 mb-4 pb-2 border-b border-zinc-100">
+                {label}
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {items.map((r) => (
+                  <a
+                    href={r.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group flex flex-col p-5 rounded-xl border border-zinc-200 bg-white hover:border-emerald-200 hover:shadow-sm transition-all"
+                  >
+                    <div class="flex items-start justify-between gap-3">
+                      <h3 class="text-sm font-semibold text-zinc-900 group-hover:text-emerald-700 transition-colors leading-snug">
+                        {r.title}
+                      </h3>
+                      <svg
+                        class="w-4 h-4 shrink-0 text-zinc-300 group-hover:text-emerald-600 transition-colors mt-0.5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                      </svg>
+                    </div>
+                    <p class="text-xs text-zinc-500 mt-2 leading-relaxed">{r.description}</p>
+                    {r.condition_slug && (
+                      <span class="mt-3 inline-flex self-start text-[10px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded uppercase tracking-wider">
+                        {r.condition_slug.replace(/-/g, ' ')}
+                      </span>
+                    )}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : null
+        )}
+      </div>
+    )}
+
+    <div class="mt-16 pt-8 border-t border-zinc-200 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+      <p class="text-sm text-zinc-500">
+        All resources are reviewed by the VA Claim Hub team before being listed.
+      </p>
+      <a
+        href="/submit-resource"
+        class="px-4 py-2 text-sm font-medium text-white bg-emerald-700 rounded-lg hover:bg-emerald-800 transition-all shrink-0"
+      >
+        Submit a Resource
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm';
+---
+
+<BaseLayout
+  title="Contact | VA Claim Hub"
+  description="Get in touch with VA Claim Hub. We're here to help veterans navigate the disability claims process."
+  tags={['contact', 'VA claim help', 'get in touch']}
+>
+  <section class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-10">
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900">
+        Contact Us
+      </h1>
+      <p class="text-zinc-500 mt-3 max-w-[55ch] leading-relaxed">
+        Have a question, suggestion, or need help navigating your VA claim? Send us a message and we'll get back to you as soon as possible.
+      </p>
+    </div>
+
+    <ContactForm client:load />
+
+    <div class="mt-12 p-5 rounded-xl bg-zinc-50 border border-zinc-100">
+      <h3 class="text-sm font-semibold text-zinc-800 mb-2">What to expect</h3>
+      <ul class="text-sm text-zinc-500 space-y-1.5">
+        <li>We typically respond within 1–2 business days</li>
+        <li>For general VA questions, you can also visit <a href="https://www.va.gov" class="text-emerald-700 hover:underline" target="_blank" rel="noopener noreferrer">va.gov</a></li>
+        <li>To submit a resource for the community, use the <a href="/submit-resource" class="text-emerald-700 hover:underline">Submit a Resource</a> page</li>
+        <li>Your contact information is never shared with third parties</li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { db } from '../../../lib/db';
-import { subscribers } from '../../../lib/schema';
+import { contacts } from '../../../lib/schema';
 import { desc } from 'drizzle-orm';
 import { isAdminAuthorized } from '../../../lib/admin-auth';
 
@@ -15,18 +15,18 @@ export const GET: APIRoute = async ({ cookies }) => {
   }
 
   try {
-    const allSubscribers = await db
+    const allContacts = await db
       .select()
-      .from(subscribers)
-      .orderBy(desc(subscribers.subscribedAt));
+      .from(contacts)
+      .orderBy(desc(contacts.createdAt));
 
-    return new Response(JSON.stringify(allSubscribers), {
+    return new Response(JSON.stringify(allContacts), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Admin subscribers fetch error:', error);
-    return new Response(JSON.stringify({ error: 'Failed to fetch subscribers' }), {
+    console.error('Admin contacts fetch error:', error);
+    return new Response(JSON.stringify({ error: 'Failed to fetch contacts' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
